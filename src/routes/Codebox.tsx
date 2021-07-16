@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../store/actions/index';
 
 import CodeEditor from '../components/CodeEditor'
+import HotRenderer from '../components/HotRenderer';
 
 import { filesType } from '../store/reducers/files';
 import { fileType } from '../Types';
@@ -17,7 +18,7 @@ export interface CodeboxProps {
 const Codebox: FC<CodeboxProps> = ({ files, udpateFileOnChange }) => {
 
     // usememo here
-    const openedFile = Object.values(files).filter(file => file.language === 'markup')[0]
+    const openedFile = Object.values(files).filter(file => file.opened)[0]
 
     return (
         <Layout
@@ -29,7 +30,7 @@ const Codebox: FC<CodeboxProps> = ({ files, udpateFileOnChange }) => {
                 />
             }
             hotView={
-                <div>hello</div>
+                <HotRenderer files={files} />
             }
         />
     )

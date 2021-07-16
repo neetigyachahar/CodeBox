@@ -1,4 +1,4 @@
-import { UPDATE_FILE_ON_CHANGE } from '../actions/actionTypes';
+import { UPDATE_FILE_ON_CHANGE, SWITCH_FILE } from '../actions/actionTypes';
 
 import { fileType } from '../../Types/index'
 
@@ -9,12 +9,12 @@ import deepCopy from 'clone-deep'
 export interface filesType {
     markup: fileType
     css: fileType
-    js: fileType
+    javascript: fileType
 }
 
-export type languageIndexType = 'markup' | 'css' | 'js'
+export type languageIndexType = 'markup' | 'css' | 'javascript'
 
-export interface actionType{
+export interface actionType {
     type: string
     [key: string]: any
 }
@@ -32,24 +32,37 @@ const initialState: filesType = {
         content: '',
         language: 'css'
     },
-    js: {
+    javascript: {
         unsavedChanges: false,
-        opened: true,
+        opened: false,
         content: '',
         language: 'javascript'
     }
 }
 
 const udpateFileOnChange = (state: filesType, action: actionType) => {
-    let newState:filesType = deepCopy(state)
+    let newState: filesType = deepCopy(state)
     newState[action.file.language as languageIndexType].content = action.file.content
+    newState[action.file.language as languageIndexType].unsavedChanges = true
     return newState
 };
+
+const switchFile = (state: filesType, action: actionType) => {
+    let newState: filesType = deepCopy(state)
+    Object.keys(newState).forEach(fileLanguage => {
+        if (newState[fileLanguage as languageIndexType].language === action.language)
+            newState[fileLanguage as languageIndexType].opened = true
+        else
+            newState[fileLanguage as languageIndexType].opened = false
+    })
+    return newState
+}
 
 
 const reducer = (state = initialState, actions: any) => {
     switch (actions.type) {
-        case UPDATE_FILE_ON_CHANGE: return udpateFileOnChange(state, actions);
+        case UPDATE_FILE_ON_CHANGE: return udpateFileOnChange(state, actions)
+        case SWITCH_FILE: return switchFile(state, actions)
         default: return state;
     }
 }

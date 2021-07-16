@@ -1,3 +1,4 @@
 export {
-    udpateFileOnChange
-} from './files' 
+    udpateFileOnChange,
+    switchFile
+} from './files'

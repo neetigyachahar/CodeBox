@@ -1,2 +1,3 @@
 //EDITOR
 export const UPDATE_FILE_ON_CHANGE = 'UPDATE_FILE_ON_CHANGE' 
+export const SWITCH_FILE = 'SWITCH_FILE' 
