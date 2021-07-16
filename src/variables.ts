@@ -1,1 +1,1 @@
-export const data = '';
+export const DRAWER_WIDTH_IN_PX = 200;
