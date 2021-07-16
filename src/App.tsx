@@ -1,25 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC } from 'react'
 
-function App() {
+import { Switch, Redirect, Route } from 'react-router-dom'
+
+import Codebox from './routes/Codebox'
+import NewCodebox from './routes/NewCodebox';
+
+const App: FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route exact path="/codebox" component={NewCodebox} />
+      <Route exact path="/codebox/:id" component={Codebox} />
+      <Redirect exact from="/" to="/codebox" />
+      <Route exact path="*">component={<div>404</div>}</Route>
+    </Switch>
   );
 }
 
