@@ -1,3 +1,5 @@
 //EDITOR
+export const SET_FILES = 'SET_FILES'
 export const UPDATE_FILE_ON_CHANGE = 'UPDATE_FILE_ON_CHANGE' 
-export const SWITCH_FILE = 'SWITCH_FILE' 
+export const SWITCH_FILE = 'SWITCH_FILE'
+export const FILES_SAVED = 'FILES_SAVED'

@@ -14,14 +14,18 @@ import {
     useTheme,
     makeStyles
 } from '@material-ui/core/styles'
-import { Menu, Code } from '@material-ui/icons'
+import { Menu, Code, Share } from '@material-ui/icons'
 import { DRAWER_WIDTH_IN_PX } from '../variables'
-
 import FileExplorer from '../components/FileExplorer/FileExplorer'
+import MessageCard from '../components/MessageCard'
+import { createPaste } from '../pastebin'
+import { filesType } from '../store/reducers/files'
 
 export interface LayoutProps {
     codeEditor: ReactNode
     hotView: ReactNode
+    files: filesType
+    filesSaved: () => void
 }
 
 const useStyles = makeStyles(({ spacing, mixins, breakpoints, palette }: Theme) =>
@@ -37,6 +41,7 @@ const useStyles = makeStyles(({ spacing, mixins, breakpoints, palette }: Theme) 
             backgroundColor: palette.grey['800']
         },
         brandName: {
+            flex: 1,
             padding: spacing(0, 1)
         },
         drawer: {
@@ -73,17 +78,27 @@ const useStyles = makeStyles(({ spacing, mixins, breakpoints, palette }: Theme) 
     })
 )
 
-const Layout: FC<LayoutProps> = ({ codeEditor, hotView }) => {
+const Layout: FC<LayoutProps> = ({ files, filesSaved, codeEditor, hotView }) => {
     const classes = useStyles();
     const theme = useTheme();
 
-    const [drawerOnMobileOpen, setMobileOpen] = useState(false);
+    const [drawerOnMobileOpen, setMobileOpen] = useState(false)
+    const [openShareDialog, setOpenShareDialog] = useState(false)
+    const [link, setLink] = useState('')
 
     const handleDrawerToggle = () => {
         setMobileOpen(!drawerOnMobileOpen);
     };
 
-
+    const saveAndShareHandler = async () => {
+        let link: string = await createPaste(JSON.stringify(files))
+        console.log(link)
+        link = `https://localhost:3000/codebox/${link.split('/')[link.split('/').length - 1]}`
+        navigator.clipboard.writeText(link)
+        setLink(link)
+        setOpenShareDialog(true)
+        filesSaved()
+    }
 
     return (
         <Box className={classes.container}>
@@ -108,6 +123,14 @@ const Layout: FC<LayoutProps> = ({ codeEditor, hotView }) => {
                     <Typography variant="h6" className={classes.brandName} noWrap>
                         CodeBox
                     </Typography>
+                    <IconButton
+                        color="inherit"
+                        aria-label="Share"
+                        edge="end"
+                        onClick={saveAndShareHandler}
+                    >
+                        <Share />
+                    </IconButton>
                 </Toolbar>
             </AppBar>
             <Box className={classes.toolbar} />
@@ -151,6 +174,20 @@ const Layout: FC<LayoutProps> = ({ codeEditor, hotView }) => {
                     </Box>
                 </Box>
             </Box>
+            <MessageCard
+                open={openShareDialog}
+                handleClose={() => setOpenShareDialog(false)}
+                message={
+                    <Box>
+                        <Typography component="div" variant="h6">
+                            link copied to clipboard!
+                        </Typography>
+                        <Typography component="div" variant="caption">
+                            {link}
+                        </Typography>
+                    </Box>
+                }
+            />
         </Box>
     )
 }

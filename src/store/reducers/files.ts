@@ -1,4 +1,9 @@
-import { UPDATE_FILE_ON_CHANGE, SWITCH_FILE } from '../actions/actionTypes';
+import {
+    SET_FILES,
+    UPDATE_FILE_ON_CHANGE,
+    SWITCH_FILE,
+    FILES_SAVED
+} from '../actions/actionTypes';
 
 import { fileType } from '../../Types/index'
 
@@ -40,6 +45,14 @@ const initialState: filesType = {
     }
 }
 
+const setFiles = (state: filesType, action: actionType) => {
+    let newState: filesType = deepCopy(initialState)
+    newState.markup.content = action.files.markup.content
+    newState.css.content = action.files.css.content
+    newState.javascript.content = action.files.javascript.content
+    return newState
+}
+
 const udpateFileOnChange = (state: filesType, action: actionType) => {
     let newState: filesType = deepCopy(state)
     newState[action.file.language as languageIndexType].content = action.file.content
@@ -58,11 +71,21 @@ const switchFile = (state: filesType, action: actionType) => {
     return newState
 }
 
+const filesSaved = (state: filesType, action: actionType) => {
+    let newState: filesType = deepCopy(state)
+    Object.keys(newState).forEach(fileLanguage => {
+        newState[fileLanguage as languageIndexType].unsavedChanges = false
+    })
+    return newState
+}
+
 
 const reducer = (state = initialState, actions: any) => {
     switch (actions.type) {
+        case SET_FILES: return setFiles(state, actions)
         case UPDATE_FILE_ON_CHANGE: return udpateFileOnChange(state, actions)
         case SWITCH_FILE: return switchFile(state, actions)
+        case FILES_SAVED: return filesSaved(state, actions)
         default: return state;
     }
 }

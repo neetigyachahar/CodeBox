@@ -1,4 +1,6 @@
 export {
     udpateFileOnChange,
-    switchFile
+    switchFile,
+    setFiles,
+    filesSaved
 } from './files'

@@ -1,6 +1,8 @@
-const NewCodebox = () => {
+import Codebox from '../components/Codebox'
+
+const NewCodebox: React.FC = () => {
     return (
-        <div>NewCodebox</div>
+        <Codebox />
     )
 }
 

@@ -1,27 +1,35 @@
-import { FC } from 'react'
+import { Dispatch, FC } from 'react'
 import Layout from '../containers/Layout'
 
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/index';
 
-import CodeEditor from '../components/CodeEditor'
-import HotRenderer from '../components/HotRenderer';
+import CodeEditor from './CodeEditor'
+import HotRenderer from './HotRenderer';
 
 import { filesType } from '../store/reducers/files';
 import { fileType } from '../Types';
 
-export interface CodeboxProps {
+export interface mapStateToPropsTypes {
     files: filesType
-    udpateFileOnChange: (file: filesType) => void
 }
 
-const Codebox: FC<CodeboxProps> = ({ files, udpateFileOnChange }) => {
+export interface mapDispatchToPropsTypes {
+    udpateFileOnChange: (file: filesType) => void
+    filesSaved: () => void
+}
+
+export type CodeboxProps = mapStateToPropsTypes & mapDispatchToPropsTypes
+
+const Codebox: FC<CodeboxProps> = ({ files, filesSaved, udpateFileOnChange }) => {
 
     // usememo here
     const openedFile = Object.values(files).filter(file => file.opened)[0]
 
     return (
         <Layout
+            files={files}
+            filesSaved={filesSaved}
             codeEditor={
                 <CodeEditor
                     code={openedFile.content}
@@ -42,10 +50,11 @@ const mapStateToProps = (state: any) => {
     }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     return {
+        filesSaved: () => dispatch(actions.filesSaved()),
         udpateFileOnChange: (file: fileType) => dispatch(actions.udpateFileOnChange(file))
     }
 }
 
-export default connect<any, any>(mapStateToProps, mapDispatchToProps)(Codebox);
+export default connect<mapStateToPropsTypes, mapDispatchToPropsTypes>(mapStateToProps, mapDispatchToProps as any)(Codebox);
