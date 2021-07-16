@@ -1,4 +1,5 @@
-# Getting Started with Create React App
+# CodeBox
+Web developer's fav code editor with hot reload! 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
