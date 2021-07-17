@@ -1,9 +1,26 @@
 # CodeBox
 Web developer's fav code editor with hot reload! 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Hosting
+To keep this protect this repo, the project was hosted on firebase
+[CodeBox](https://codebox-2a0ac.web.app/codebox)
+
+Since Pastebin api were not reliable and had very limited quota, I quickly created a similar solution in express and mongoDB.
+Hosted [here](https://codebox-api.herokuapp.com/)
+
+## Screenshots
+The used example below: [https://codebox-2a0ac.web.app/codebox/60f26735e011b00015c2bad0](https://codebox-2a0ac.web.app/codebox/60f26735e011b00015c2bad0)
+[html](./images/html.png)
+[css](./images/css.png)
+[js](./images/js.png)
+[responsive1](./images/responsive1.png)
+[responsive2](./images/responsive2.png)
+[share](./images/share.png)
+[shareUrl](./images/shareUrl.png)
 
 ## Available Scripts
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 In the project directory, you can run:
 
