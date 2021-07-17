@@ -10,13 +10,13 @@ Hosted [here](https://codebox-api.herokuapp.com/)
 
 ## Screenshots
 The used example below: [https://codebox-2a0ac.web.app/codebox/60f26735e011b00015c2bad0](https://codebox-2a0ac.web.app/codebox/60f26735e011b00015c2bad0)
-[html](./images/html.png)
-[css](./images/css.png)
-[js](./images/js.png)
-[responsive1](./images/responsive1.png)
-[responsive2](./images/responsive2.png)
-[share](./images/share.png)
-[shareUrl](./images/shareUrl.png)
+![html](./images/html.png)
+![css](./images/css.png)
+![js](./images/js.png)
+![responsive1](./images/responsive1.png)
+![responsive2](./images/responsive2.png)
+![share](./images/share.png)
+![shareUrl](./images/shareUrl.png)
 
 ## Available Scripts
 
