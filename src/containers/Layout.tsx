@@ -19,6 +19,7 @@ import { DRAWER_WIDTH_IN_PX } from '../variables'
 import FileExplorer from '../components/FileExplorer/FileExplorer'
 import MessageCard from '../components/MessageCard'
 import axios from 'axios'
+import Loading from '../components/Loading'
 import { filesType } from '../store/reducers/files'
 
 export interface LayoutProps {
@@ -84,6 +85,7 @@ const Layout: FC<LayoutProps> = ({ files, filesSaved, codeEditor, hotView }) => 
 
     const [drawerOnMobileOpen, setMobileOpen] = useState(false)
     const [openShareDialog, setOpenShareDialog] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [link, setLink] = useState('')
 
     const handleDrawerToggle = () => {
@@ -91,12 +93,14 @@ const Layout: FC<LayoutProps> = ({ files, filesSaved, codeEditor, hotView }) => 
     };
 
     const saveAndShareHandler = async () => {
+        setLoading(true)
         let reply: any = await axios.post('https://codebox-api.herokuapp.com/create', { paste: JSON.stringify(files) })
-        let link = `https://localhost:3000/codebox/${reply.data.id}`
+        let link = `https://codebox-2a0ac.web.app/codebox/${reply.data.id}`
         navigator.clipboard.writeText(link)
         setLink(link)
         setOpenShareDialog(true)
         filesSaved()
+        setLoading(false)
     }
 
     return (
@@ -187,6 +191,9 @@ const Layout: FC<LayoutProps> = ({ files, filesSaved, codeEditor, hotView }) => 
                     </Box>
                 }
             />
+            {loading &&
+                <Loading />
+            }
         </Box>
     )
 }
