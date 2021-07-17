@@ -3,10 +3,10 @@ Web developer's fav code editor with hot reload!
 
 ## Hosting 
 - Please wait for heroku to wake after clicking on the link
-To keep this repo protected, the project was hosted on firebase
+- To keep this repo protected, the project was hosted on firebase
 [CodeBox](https://codebox-2a0ac.web.app/codebox)
 
-Since Pastebin api were not reliable and had very limited quota, I quickly created a similar solution in express and mongoDB.
+-Since Pastebin api were not reliable and had very limited quota, I quickly created a similar solution in express and mongoDB.
 Hosted [here](https://codebox-api.herokuapp.com/)
 
 ## Screenshots
