@@ -1,7 +1,8 @@
 # CodeBox
 Web developer's fav code editor with hot reload! 
 
-## Hosting
+## Hosting 
+- Please wait for heroku to wake after clicking on the link
 To keep this repo protected, the project was hosted on firebase
 [CodeBox](https://codebox-2a0ac.web.app/codebox)
 
