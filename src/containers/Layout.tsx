@@ -18,7 +18,7 @@ import { Menu, Code, Share } from '@material-ui/icons'
 import { DRAWER_WIDTH_IN_PX } from '../variables'
 import FileExplorer from '../components/FileExplorer/FileExplorer'
 import MessageCard from '../components/MessageCard'
-import { createPaste } from '../pastebin'
+import axios from 'axios'
 import { filesType } from '../store/reducers/files'
 
 export interface LayoutProps {
@@ -91,9 +91,8 @@ const Layout: FC<LayoutProps> = ({ files, filesSaved, codeEditor, hotView }) => 
     };
 
     const saveAndShareHandler = async () => {
-        let link: string = await createPaste(JSON.stringify(files))
-        console.log(link)
-        link = `https://localhost:3000/codebox/${link.split('/')[link.split('/').length - 1]}`
+        let reply: any = await axios.post('https://codebox-api.herokuapp.com/create', { paste: JSON.stringify(files) })
+        let link = `https://localhost:3000/codebox/${reply.data.id}`
         navigator.clipboard.writeText(link)
         setLink(link)
         setOpenShareDialog(true)

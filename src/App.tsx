@@ -1,22 +1,11 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 
 import { Switch, Redirect, Route } from 'react-router-dom'
 
 import ViewCodebox from './routes/ViewCodebox'
 import NewCodebox from './routes/NewCodebox';
-// import { create } from './pastebin'
-
 
 const App: FC = () => {
-
-  
-  // useEffect(() => {
-  //   load()
-
-  // }, []);
-
-
-
   return (
     <Switch>
       <Route exact path="/codebox" component={NewCodebox} />

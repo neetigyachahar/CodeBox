@@ -5,10 +5,8 @@ import MessageCard from '../components/MessageCard'
 import Loading from '../components/Loading'
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/index';
-import axios from 'axios'
 import { filesType } from '../store/reducers/files'
-import { getPaste } from '../pastebin'
-
+import axios from 'axios'
 
 interface MatchParams {
     id: string
@@ -29,10 +27,10 @@ const ViewCodebox: FC<ViewCodeboxPropsTypes> = ({ setFiles, match }) => {
     const loadCodebox = async () => {
         try {
             const id = match.params.id
-            let files: any = await getPaste(id)
-            if (files.data.length) {
-                files = JSON.parse(files.data)
-                setFiles(files)
+            let data: any = await axios.get(`https://codebox-api.herokuapp.com/paste/${id}`)
+            if (data.data.paste.length) {
+                setFiles(JSON.parse(data.data.paste))
+                setLoading(false)
             } else {
                 throw new Error()
             }
