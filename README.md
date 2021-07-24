@@ -3,11 +3,9 @@ Web developer's fav code editor with hot reload!
 
 ## Hosting 
 - Please wait for heroku to wake after clicking on the link
-- To keep this repo protected, the project was hosted on firebase
-[CodeBox - https://codebox-2a0ac.web.app/codebox](https://codebox-2a0ac.web.app/codebox)
-
+- Hosting: [CodeBox - https://codebox-2a0ac.web.app/codebox](https://codebox-2a0ac.web.app/codebox)
 - Since Pastebin api were not reliable and had very limited quota, I quickly created a similar solution in express and mongoDB.
-Hosted [here](https://codebox-api.herokuapp.com/)
+- Hosting [here](https://codebox-api.herokuapp.com/)
 
 ## Screenshots
 The used example below: [https://codebox-2a0ac.web.app/codebox/60f26735e011b00015c2bad0](https://codebox-2a0ac.web.app/codebox/60f26735e011b00015c2bad0)
